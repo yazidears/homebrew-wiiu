@@ -2,7 +2,7 @@
 
 ```sh
 brew tap yazidears/wiiu
-brew install wiiu-audio gamepad-bridge
+brew install yazidears/wiiu/wiiu-audio yazidears/wiiu/gamepad-bridge
 ```
 
 - [wiiu-audio](https://github.com/yazidears/wiiu-audio): listen to Wii U TV audio on your Mac. Requires a homebrew-enabled Wii U and the audio plugins described in its README.
