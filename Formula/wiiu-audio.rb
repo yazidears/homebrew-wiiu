@@ -33,6 +33,8 @@ class WiiuAudio < Formula
     clt = Pathname("/Library/Developer/CommandLineTools")
     if !File.executable?(File.join(selected_developer, "usr/bin/xcrun")) && clt.directory?
       ENV["DEVELOPER_DIR"] = clt.to_s
+      # Homebrew's xcrun shim discards DEVELOPER_DIR for compiler commands.
+      ENV["PATH"] = "/usr/bin:#{ENV["PATH"]}"
     end
     virtualenv_install_with_resources
   end

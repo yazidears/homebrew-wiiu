@@ -14,6 +14,8 @@ class GamepadBridge < Formula
     clt = Pathname("/Library/Developer/CommandLineTools")
     if !File.executable?(File.join(selected_developer, "usr/bin/xcrun")) && clt.directory?
       ENV["DEVELOPER_DIR"] = clt.to_s
+      # Homebrew's xcrun shim discards DEVELOPER_DIR for compiler commands.
+      ENV["PATH"] = "/usr/bin:#{ENV["PATH"]}"
     end
     python = Formula["python@3.14"].opt_bin/"python3.14"
     system python, "build.py"
