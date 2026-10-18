@@ -29,6 +29,11 @@ class WiiuAudio < Formula
   end
 
   def install
+    selected_developer = Utils.safe_popen_read("/usr/bin/xcode-select", "-p").strip
+    clt = Pathname("/Library/Developer/CommandLineTools")
+    if !File.executable?(File.join(selected_developer, "usr/bin/xcrun")) && clt.directory?
+      ENV["DEVELOPER_DIR"] = clt.to_s
+    end
     virtualenv_install_with_resources
   end
 

@@ -10,6 +10,11 @@ class GamepadBridge < Formula
   depends_on "python@3.14"
 
   def install
+    selected_developer = Utils.safe_popen_read("/usr/bin/xcode-select", "-p").strip
+    clt = Pathname("/Library/Developer/CommandLineTools")
+    if !File.executable?(File.join(selected_developer, "usr/bin/xcrun")) && clt.directory?
+      ENV["DEVELOPER_DIR"] = clt.to_s
+    end
     python = Formula["python@3.14"].opt_bin/"python3.14"
     system python, "build.py"
     libexec.install "startup-service.py", "video_stream.py", "audio_stream.py", "input_report.py",
